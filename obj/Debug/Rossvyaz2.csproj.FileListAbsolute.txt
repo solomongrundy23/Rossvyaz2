@@ -1,0 +1,17 @@
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Debug\MainWindow.g.cs
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Debug\App.g.cs
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Debug\MainWindow.baml
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Debug\Rossvyaz2.Properties.Resources.resources
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Debug\Rossvyaz2.csproj.GenerateResource.cache
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Debug\Rossvyaz2.csproj.CoreCompileInputs.cache
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Debug\WorkWindow.g.cs
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Debug\WorkWindow.baml
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\bin\Debug\RSParser.exe.config
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\bin\Debug\RSParser.exe
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\bin\Debug\RSParser.pdb
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Debug\RSParser_MarkupCompile.cache
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Debug\RSParser_MarkupCompile.lref
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Debug\RSParser.g.resources
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Debug\RSParser.exe
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Debug\RSParser.pdb
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Debug\Rossvyaz2.csprojAssemblyReference.cache

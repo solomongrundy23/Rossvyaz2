@@ -1,0 +1,16 @@
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\bin\Release\RSParser.exe.config
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\bin\Release\RSParser.exe
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\bin\Release\RSParser.pdb
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Release\MainWindow.g.cs
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Release\WorkWindow.g.cs
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Release\App.g.cs
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Release\RSParser_MarkupCompile.cache
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Release\RSParser_MarkupCompile.lref
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Release\MainWindow.baml
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Release\WorkWindow.baml
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Release\RSParser.g.resources
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Release\Rossvyaz2.Properties.Resources.resources
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Release\Rossvyaz2.csproj.GenerateResource.cache
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Release\Rossvyaz2.csproj.CoreCompileInputs.cache
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Release\RSParser.exe
+C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Release\RSParser.pdb
