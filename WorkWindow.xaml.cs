@@ -115,16 +115,17 @@ namespace Rossvyaz2
                 _OutText = value;
                 Dispatcher.Invoke(() =>
                 {
-                    bool isEmpty = value.Length == 0;
-                    if (isEmpty) OutTextBox.Text = "Нет данных";
-                    if (value.Length > 5000)
+                    if (_OutText.IsEmpty()) OutTextBox.Text = "Нет данных или пустой результат";
+                    else
+                    if (_OutText.Length > 5000)
                     {
                         OutTextBox.Text = "Внимание! Результат большой, отображаются первые 10000 символов, " +
-                        "скопируйте или сохраните результат по соответствующим кнопкам" + Environment.NewLine + Environment.NewLine + value.Cut(10000);
+                        "скопируйте или сохраните результат по соответствующим кнопкам" 
+                        + Environment.NewLine + Environment.NewLine + _OutText.Cut(10000);
                     }
                     else
-                        OutTextBox.Text = value;
-                    ButtonSave.IsEnabled = ButtonCopy.IsEnabled = !isEmpty;
+                        OutTextBox.Text = _OutText;
+                    ButtonSave.IsEnabled = ButtonCopy.IsEnabled = !_OutText.IsEmpty();
                 });
             }
         }
@@ -185,14 +186,17 @@ namespace Rossvyaz2
                 MainFrameEnabled = false;
                 string splitter = SplitterSelector.Text == "ENTER" ? Environment.NewLine : SplitterSelector.Text;
                 int style = ModeSelector.SelectedIndex;
+                bool checkOperatorNo = CheckOperatorNo.IsChecked.Value;
+                bool checkRegionNo = CheckRegionNo.IsChecked.Value;
                 await Task.Run(() =>
                 {
                     var phoneRanger = new PhoneRanger();
                     phoneRanger.Ranges.AddRange(
                         rossRecords.GetRecords(
-                            Operators.Selected.ToArray(), Regions.Selected.ToArray())
+                            Operators.Selected.ToArray(), Regions.Selected.ToArray(), checkOperatorNo, checkRegionNo)
                         .Select(x => new Range(x.Min, x.Max)));
                     phoneRanger.Merge();
+                    if (phoneRanger.Ranges.Count() == 0) OutText = string.Empty;
                     switch (style)
                     {
                         case 0:

@@ -155,15 +155,43 @@ namespace Rossvyaz2
         /// <param name="operator_name">оператор</param>
         /// <param name="region_name">регион</param>
         /// <returns>массив записей</returns>
-        public Record[] GetRecords(string[] operator_name, string[] region_name)
+        public Record[] GetRecords(string[] operator_name, string[] region_name, bool operatorNotContains, bool regionNotContains)
         {
             if (operator_name.Length == 0 && region_name.Length == 0) 
                 return Items.ToArray();
-            if (operator_name.Length > 0 && region_name.Length == 0)
-                return Items.Where(x => operator_name.Contains(x.Operator)).ToArray();
-            if (operator_name.Length == 0 && region_name.Length > 0)
-                return Items.Where(x => region_name.Contains(x.Region)).ToArray();
-            return Items.Where(x => operator_name.Contains(x.Operator) && region_name.Contains(x.Region)).ToArray();
+            if (operatorNotContains && regionNotContains)
+            {
+                if (operator_name.Length > 0 && region_name.Length == 0)
+                    return Items.Where(x => !operator_name.Contains(x.Operator)).ToArray();
+                if (operator_name.Length == 0 && region_name.Length > 0)
+                    return Items.Where(x => !region_name.Contains(x.Region)).ToArray();
+                return Items.Where(x => !operator_name.Contains(x.Operator) && !region_name.Contains(x.Region)).ToArray();
+            }
+            else
+            if (operatorNotContains && !regionNotContains)
+            {
+                if (operator_name.Length > 0 && region_name.Length == 0)
+                    return Items.Where(x => !operator_name.Contains(x.Operator)).ToArray();
+                if (operator_name.Length == 0 && region_name.Length > 0)
+                    return Items.Where(x => region_name.Contains(x.Region)).ToArray();
+                return Items.Where(x => !operator_name.Contains(x.Operator) && region_name.Contains(x.Region)).ToArray();
+            }
+            if (!operatorNotContains && regionNotContains)
+            {
+                if (operator_name.Length > 0 && region_name.Length == 0)
+                    return Items.Where(x => operator_name.Contains(x.Operator)).ToArray();
+                if (operator_name.Length == 0 && region_name.Length > 0)
+                    return Items.Where(x => !region_name.Contains(x.Region)).ToArray();
+                return Items.Where(x => operator_name.Contains(x.Operator) && !region_name.Contains(x.Region)).ToArray();
+            }
+            else
+            {
+                if (operator_name.Length > 0 && region_name.Length == 0)
+                    return Items.Where(x => operator_name.Contains(x.Operator)).ToArray();
+                if (operator_name.Length == 0 && region_name.Length > 0)
+                    return Items.Where(x => region_name.Contains(x.Region)).ToArray();
+                return Items.Where(x => operator_name.Contains(x.Operator) && region_name.Contains(x.Region)).ToArray();
+            }
         }
         /// <summary>
         /// Получить записи по оператору и региону
