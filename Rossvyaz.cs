@@ -245,39 +245,41 @@ namespace Rossvyaz2
 
     public static class CSVLoader
     {
-        public static Dictionary<string, string> urls = new Dictionary<string, string>()
+        public static List<string> urls = new List<string>()
         {
-            {"Kody_DEF-9kh.csv", "https://www.rossvyaz.ru/docs/articles/Kody_DEF-9kh.csv"},
-            {"Kody_ABC-3kh.csv", "https://www.rossvyaz.ru/docs/articles/Kody_ABC-3kh.csv"},
-            {"Kody_ABC-4kh.csv", "https://www.rossvyaz.ru/docs/articles/Kody_ABC-4kh.csv"},
-            {"Kody_ABC-8kh.csv", "https://www.rossvyaz.ru/docs/articles/Kody_ABC-8kh.csv"}
+            "https://www.rossvyaz.ru/docs/articles/Kody_DEF-9kh.csv",
+            "https://www.rossvyaz.ru/docs/articles/Kody_ABC-3kh.csv",
+            "https://www.rossvyaz.ru/docs/articles/Kody_ABC-4kh.csv",
+            "https://www.rossvyaz.ru/docs/articles/Kody_ABC-8kh.csv"
         };
 
-        public static async Task DownloadAsync() => await Task.Run(() => Download());
-        public static void Download()
+        public static async Task<Exception> DownloadAsync() => await Task.Run(() => Download());
+        public static Exception Download()
         {
             var Errors = new StringBuilder();
-            foreach (KeyValuePair<string, string> url in urls)
+            foreach (string url in urls)
             {
-                string ex = Download_file(url.Value, url.Key);
-                if (ex != null) Errors.AppendLine($"{url.Value} : {ex}");
-            } 
-            if (Errors.Length > 0) throw new Exception(Errors.ToString());
+                try
+                {
+                    Download_file(url, url.Split('/').Last());
+                }
+                catch (Exception ex)
+                {
+                    Errors.AppendLine($"url: {url}");
+                    Errors.AppendLine($"error: {ex.Message}");
+                }
+            }
+            if (Errors.ToString() == string.Empty)
+                return null;
+            else
+                return new Exception(Errors.ToString());
         }
 
-        private static string Download_file(string input, string output)
+        private static void Download_file(string input, string output)
         {
-            try
+            using (var webClient = new WebClient())
             {
-                using (var webClient = new WebClient())
-                {
-                    webClient.DownloadFile(input, output);
-                }
-                return null;
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
+                webClient.DownloadFile(input, output);
             }
         }
     }

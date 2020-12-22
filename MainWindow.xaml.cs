@@ -84,7 +84,7 @@ namespace Rossvyaz2
         {
             FormEnabled = false;
             ProgressVisible = true;
-            if (await DownloadCSV())
+            if (await DownloadCSV(OptionsWorker.Options.Urls))
                 Files = OptionsWorker.Options.Urls.Select(x => GetFileNameFromUrl(x)).ToArray();
             ProgressVisible = false;
             FormEnabled = true;
@@ -93,7 +93,7 @@ namespace Rossvyaz2
         private string GetFileNameFromUrl(string str)
             => OptionsWorker.DataPath + System.IO.Path.GetFileName(str);
 
-        private async Task<bool> DownloadCSV()
+        private async Task<bool> DownloadCSV(string[] url_array)
         {
             return await Task.Run(() =>
             {

@@ -140,29 +140,29 @@ namespace Rossvyaz2
 
         private void RegionsFilterUnselect_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdateElement(RegionsUnselect, Regions.NoSelect, RegionsFilterUnselect.Text);
+            UpdateElement(RegionsUnselect, Regions.NoSelect, RegionsFilterUnselect.Text.ToLower());
         }
 
         private void RegionsFilterSelect_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdateElement(RegionsSelected, Regions.Selected, RegionsFilterSelect.Text);
+            UpdateElement(RegionsSelected, Regions.Selected, RegionsFilterSelect.Text.ToLower());
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             foreach (string item in RegionsSelected.SelectedItems) Regions.UnSelect(item);
-            UpdateElement(RegionsUnselect, Regions.NoSelect, RegionsFilterUnselect.Text);
-            UpdateElement(RegionsSelected, Regions.Selected, RegionsFilterSelect.Text);
+            UpdateElement(RegionsUnselect, Regions.NoSelect, RegionsFilterUnselect.Text.ToLower());
+            UpdateElement(RegionsSelected, Regions.Selected, RegionsFilterSelect.Text.ToLower());
         }
 
         private void OperatorsFilterUnselect_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdateElement(OperatorsUnselect, Operators.NoSelect, OperatorsFilterUnselect.Text);
+            UpdateElement(OperatorsUnselect, Operators.NoSelect, OperatorsFilterUnselect.Text.ToLower());
         }
 
         private void OperatorsFilterSelect_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdateElement(OperatorsSelected, Operators.Selected, OperatorsFilterSelect.Text);
+            UpdateElement(OperatorsSelected, Operators.Selected, OperatorsFilterSelect.Text.ToLower());
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -206,7 +206,7 @@ namespace Rossvyaz2
                             OutText = string.Join(splitter, phoneRanger.BreakingRange(false));
                             break;
                         case 2:
-                            OutText = string.Join(splitter, phoneRanger.Ranges.Select(x => $"{x.Min};{x.Max}"));
+                            OutText = string.Join(splitter, phoneRanger.Ranges.Select(x => $"{x.Min}-{x.Max}"));
                             break;
                         default:
                             throw new Exception("Обработчик для данного стиля не найден");

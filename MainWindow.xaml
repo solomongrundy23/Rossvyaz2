@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Rossvyaz2"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="Rossvyaz2.MainWindow"
         mc:Ignorable="d"
-        Title="Парсер csv-файлов РосСвязи" Icon="Images/icons8-уборочная-машина-48.png" BorderThickness="2" BorderBrush="Black" Height="330" Width="640" 
+        Title="Парсер csv-файлов РосСвязи" Icon="Images/icons8-уборочная-машина-48.png" BorderThickness="2" BorderBrush="LightSlateGray" Height="330" Width="640" 
         FontFamily="Open Sans" FontSize="16" MinHeight="0" MinWidth="0" ResizeMode="CanMinimize" WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen" 
     Loaded="OnLoad" IsVisibleChanged="Window_IsVisibleChanged" Closed="Window_Closed" MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Grid>
@@ -52,7 +52,7 @@
                 </Grid>
             </Button>
         </Grid>
-        <Border x:Name="ProgressInfo" Visibility="Visible" Height="0" Width="400" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="10" BorderBrush="Gray" Background="#DD000000">
+        <Border x:Name="ProgressInfo" Visibility="Visible" Height="0" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Center" CornerRadius="10" BorderBrush="Gray" Background="#DD000000" Margin="20">
             <ProgressBar Height="30" Margin="10" BorderBrush="White" Foreground="White" Background="Black" IsIndeterminate="True" />
         </Border>
         <Grid x:Name="About" Margin="3" Height="0" VerticalAlignment="Stretch" Background="White">
