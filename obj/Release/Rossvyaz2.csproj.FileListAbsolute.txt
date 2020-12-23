@@ -17,7 +17,6 @@ C:\Users\anger\source\repos\Rossvyaz2\Rossvyaz2\obj\Release\RSParser.pdb
 E:\MYDATA\repos\Rossvyaz2\Rossvyaz2\bin\Release\RSParser.exe.config
 E:\MYDATA\repos\Rossvyaz2\Rossvyaz2\bin\Release\RSParser.exe
 E:\MYDATA\repos\Rossvyaz2\Rossvyaz2\bin\Release\RSParser.pdb
-E:\MYDATA\repos\Rossvyaz2\Rossvyaz2\obj\Release\Rossvyaz2.csprojAssemblyReference.cache
 E:\MYDATA\repos\Rossvyaz2\Rossvyaz2\obj\Release\MainWindow.g.cs
 E:\MYDATA\repos\Rossvyaz2\Rossvyaz2\obj\Release\WorkWindow.g.cs
 E:\MYDATA\repos\Rossvyaz2\Rossvyaz2\obj\Release\App.g.cs
@@ -33,3 +32,4 @@ E:\MYDATA\repos\Rossvyaz2\Rossvyaz2\obj\Release\Rossvyaz2.csproj.GenerateResourc
 E:\MYDATA\repos\Rossvyaz2\Rossvyaz2\obj\Release\Rossvyaz2.csproj.CoreCompileInputs.cache
 E:\MYDATA\repos\Rossvyaz2\Rossvyaz2\obj\Release\RSParser.exe
 E:\MYDATA\repos\Rossvyaz2\Rossvyaz2\obj\Release\RSParser.pdb
+E:\MYDATA\repos\Rossvyaz2\Rossvyaz2\obj\Release\Rossvyaz2.csprojAssemblyReference.cache

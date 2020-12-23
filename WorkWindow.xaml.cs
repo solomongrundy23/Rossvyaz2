@@ -42,10 +42,12 @@ namespace Rossvyaz2
             {
                 ProgressVisible = !value;
                 int To = value ? 0 : 20;
-                DoubleAnimation blur = new DoubleAnimation();
-                blur.To = To;
-                blur.Duration = TimeSpan.FromMilliseconds(300);
-                blur.AccelerationRatio = 0.5;
+                DoubleAnimation blur = new DoubleAnimation()
+                {
+                    To = To,
+                    Duration = TimeSpan.FromMilliseconds(500),
+                    AccelerationRatio = 0.5
+                };
                 MainFrameBlur.BeginAnimation(BlurEffect.RadiusProperty, blur);
                 MainFrame.IsEnabled = value;
             }
@@ -57,10 +59,12 @@ namespace Rossvyaz2
             set
             {
                 int To = value ? 200 : 0;
-                DoubleAnimation anim = new DoubleAnimation();
-                anim.To = To;
-                anim.Duration = TimeSpan.FromMilliseconds(300);
-                anim.AccelerationRatio = 0.5;
+                var anim = new DoubleAnimation()
+                {
+                    To = To,
+                    Duration = TimeSpan.FromMilliseconds(500)
+                    //AccelerationRatio = 0.5
+                };
                 ProgressInfo.BeginAnimation(HeightProperty, anim);
             }
         }

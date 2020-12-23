@@ -152,7 +152,7 @@
                 </Grid>
             </Button>
         </Grid>
-        <Border x:Name="ProgressInfo" Visibility="Visible" Height="200" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Center" CornerRadius="10" BorderBrush="Gray" Background="#DD000000" Margin="20" Grid.RowSpan="2">
+        <Border x:Name="ProgressInfo" Visibility="Visible" Height="0" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Center" CornerRadius="10" BorderBrush="Gray" Background="#DD000000" Margin="20" Grid.RowSpan="2">
             <ProgressBar Height="30" Margin="10" BorderBrush="White" Foreground="White" Background="Black" IsIndeterminate="True" />
         </Border>
     </Grid>

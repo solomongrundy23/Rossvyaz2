@@ -57,10 +57,12 @@ namespace Rossvyaz2
             set
             {
                 int To = value ? 0 : 20;
-                DoubleAnimation blur = new DoubleAnimation();
-                blur.To = To;
-                blur.Duration = TimeSpan.FromMilliseconds(300);
-                blur.AccelerationRatio = 0.5;
+                DoubleAnimation blur = new DoubleAnimation()
+                {
+                    To = To,
+                    Duration = TimeSpan.FromMilliseconds(500),
+                    AccelerationRatio = 0.5
+                };
                 MainBlur.BeginAnimation(BlurEffect.RadiusProperty, blur);
                 MainFrame.IsEnabled = value;
             }
@@ -72,10 +74,12 @@ namespace Rossvyaz2
             set
             {
                 int To = value ? 200 : 0;
-                DoubleAnimation anim = new DoubleAnimation();
-                anim.To = To;
-                anim.Duration = TimeSpan.FromMilliseconds(300);
-                anim.AccelerationRatio = 0.5;
+                DoubleAnimation anim = new DoubleAnimation()
+                {
+                    To = To,
+                    Duration = TimeSpan.FromMilliseconds(500),
+                    AccelerationRatio = 0.5
+                };
                 ProgressInfo.BeginAnimation(HeightProperty, anim);
             }
         }
@@ -156,7 +160,7 @@ namespace Rossvyaz2
                 int To = value ? 230 : 0;
                 DoubleAnimation anim = new DoubleAnimation();
                 anim.To = To;
-                anim.Duration = TimeSpan.FromMilliseconds(300);
+                anim.Duration = TimeSpan.FromMilliseconds(500);
                 anim.AccelerationRatio = 0.5;
                 About.BeginAnimation(HeightProperty, anim);
             }
@@ -176,11 +180,6 @@ namespace Rossvyaz2
         {
             Process.Start(@"https://money.yandex.ru/to/410018346573481");
             AboutVisible = false;
-        }
-
-        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed) this.DragMove();
         }
 
         private void WindowsFalls_MouseEnter(object sender, MouseEventArgs e)

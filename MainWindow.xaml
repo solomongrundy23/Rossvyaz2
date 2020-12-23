@@ -6,20 +6,36 @@
         xmlns:local="clr-namespace:Rossvyaz2"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="Rossvyaz2.MainWindow"
         mc:Ignorable="d"
-        Title="Парсер csv-файлов РосСвязи" Icon="Images/icons8-уборочная-машина-48.png" BorderThickness="2" BorderBrush="LightSlateGray" Height="330" Width="640" 
+        Title="Парсер csv-файлов РосСвязи" Icon="Images/icons8-уборочная-машина-48.png" Height="480" Width="640"  Background="White"
         FontFamily="Open Sans" FontSize="16" MinHeight="0" MinWidth="0" ResizeMode="CanMinimize" WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen" 
-    Loaded="OnLoad" IsVisibleChanged="Window_IsVisibleChanged" Closed="Window_Closed" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    Loaded="OnLoad" IsVisibleChanged="Window_IsVisibleChanged" Closed="Window_Closed">
     <Grid>
+        <Border>
         <Grid x:Name="MainFrame" Margin="10,10,10,10">
             <Grid.Effect>
-                <BlurEffect x:Name="MainBlur" Radius="20"/>
+                <BlurEffect x:Name="MainBlur" Radius="0"/>
             </Grid.Effect>
-            <Label Content="Пути файлов:" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top" Width="131" Height="95" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-            <ListBox x:Name="TextFiles" Height="92" Margin="146,14,68,0" VerticalAlignment="Top" BorderBrush="Black"/>
-            <Button x:Name="DoWork" HorizontalAlignment="Right" Margin="0,14,10,0" VerticalAlignment="Top" Width="53" Height="92" Background="Transparent" BorderBrush="Black" Click="Button_Click">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Margin="5" Content="Пути файлов:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <ListBox Grid.Row="0" Grid.Column="1" Margin="5" Grid.ColumnSpan="3" Grid.RowSpan="3" x:Name="TextFiles" BorderBrush="Black"/>
+            <Button Grid.Row="0" Grid.Column="4" Margin="5" x:Name="DoWork" Background="Transparent" BorderBrush="Black" Click="Button_Click">
                 <Image  Source="Images/icons8-открыть-папку-26.png" Stretch="None"/>
             </Button>
-            <Button Margin="10,111,10,0" VerticalAlignment="Top" Height="58" Background="Transparent" BorderBrush="Black" Click="Button_Click_2">
+            <Button Grid.Row="3" Grid.ColumnSpan="5" Margin="5"  Background="Transparent" BorderBrush="Black" Click="Button_Click_2">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -30,8 +46,8 @@
                 </Grid>
             </Button>
 
-            <Label Content="Загрузить актуальные CSV-файлы с сайта РосСвязи:" HorizontalAlignment="Left" Margin="10,174,0,0" Width="401" Height="32" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <Button Margin="411,174,10,0" Background="Transparent" BorderBrush="Black" Height="32" VerticalAlignment="Top" Click="Button_Click_1">
+            <Label Margin="5" Grid.Row="4" Grid.ColumnSpan="3"  Content="Актуальные CSV-файлы с сайта РосСвязи:" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Button Margin="5" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Background="Transparent" BorderBrush="Black" Click="Button_Click_1">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -41,7 +57,7 @@
                     <Label Grid.Column="1" Content="Загрузить" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 </Grid>
             </Button>
-            <Button Margin="10,211,10,0" Background="Transparent" BorderBrush="Black" Height="38" VerticalAlignment="Top" Click="Button_Click_3">
+            <Button Grid.Row="6" Grid.ColumnSpan="5" Margin="5" Background="Transparent" BorderBrush="Black" Click="Button_Click_3">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -52,12 +68,13 @@
                 </Grid>
             </Button>
         </Grid>
+        </Border>
         <Border x:Name="ProgressInfo" Visibility="Visible" Height="0" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Center" CornerRadius="10" BorderBrush="Gray" Background="#DD000000" Margin="20">
             <ProgressBar Height="30" Margin="10" BorderBrush="White" Foreground="White" Background="Black" IsIndeterminate="True" />
         </Border>
-        <Grid x:Name="About" Margin="3" Height="0" VerticalAlignment="Stretch" Background="White">
+        <Grid x:Name="About" Margin="10" Height="0" VerticalAlignment="Stretch" Background="White">
             <Grid.Effect>
-                <DropShadowEffect BlurRadius="50" Direction="0"/>
+                <DropShadowEffect BlurRadius="10" Direction="0"/>
             </Grid.Effect>
             <Border BorderBrush="Black" BorderThickness="2">
                 <Grid>
