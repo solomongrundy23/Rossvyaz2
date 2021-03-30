@@ -25,9 +25,14 @@ namespace Rossvyaz2
 
     public partial class MainWindow : Window
     {
+        public string ProgressTitle
+        {
+            set => Dispatcher.Invoke(() => ProgressText.Content = value);
+        }
+
         public MainWindow()
         {
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             try
             {
                 OptionsWorker.Load();
@@ -59,6 +64,7 @@ namespace Rossvyaz2
                 int To = value ? 0 : 20;
                 DoubleAnimation blur = new DoubleAnimation()
                 {
+                    IsAdditive = true,
                     To = To,
                     Duration = TimeSpan.FromMilliseconds(500),
                     AccelerationRatio = 0.5
@@ -76,6 +82,7 @@ namespace Rossvyaz2
                 int To = value ? 200 : 0;
                 DoubleAnimation anim = new DoubleAnimation()
                 {
+                    IsAdditive = true,
                     To = To,
                     Duration = TimeSpan.FromMilliseconds(500),
                     AccelerationRatio = 0.5
@@ -84,18 +91,42 @@ namespace Rossvyaz2
             }
         }
 
+        public static void Error(string text)
+        {
+            MessageBox.Show(text, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
         private async void Button_Click_1(object sender, RoutedEventArgs e)
         {
             FormEnabled = false;
             ProgressVisible = true;
-            if (await DownloadCSV(OptionsWorker.Options.Urls))
+            try
+            {
+                foreach (string url in OptionsWorker.Options.Urls)
+                {
+                    ProgressTitle = $"Скачиваю\n{url}";
+                    if (!await DownloadCSV(url)) throw new Exception($"Ошибка скачивания файла\n{url}");
+                }
                 Files = OptionsWorker.Options.Urls.Select(x => GetFileNameFromUrl(x)).ToArray();
-            ProgressVisible = false;
-            FormEnabled = true;
+            }
+            catch (Exception ex)
+            {
+                Error(ex.Message);
+            }
+            finally
+            {
+                ProgressVisible = false;
+                FormEnabled = true;
+            }
         }
 
         private string GetFileNameFromUrl(string str)
             => OptionsWorker.DataPath + System.IO.Path.GetFileName(str);
+
+        private async Task<bool> DownloadCSV(string url)
+        {
+            return await DownloadCSV(new string[] { url });
+        }
 
         private async Task<bool> DownloadCSV(string[] url_array)
         {
@@ -106,8 +137,8 @@ namespace Rossvyaz2
                     if (!Directory.Exists(OptionsWorker.DataPath)) 
                         Directory.CreateDirectory(OptionsWorker.DataPath);
                     using (var wc = new WebClient())
-                        for (int i = 0; i < OptionsWorker.Options.Urls.Length; i++)
-                            wc.DownloadFile(OptionsWorker.Options.Urls[i], GetFileNameFromUrl(OptionsWorker.Options.Urls[i]));
+                        foreach(string url in url_array)
+                            wc.DownloadFile(url, GetFileNameFromUrl(url));
                     return true;
                 }
                 catch (Exception ex)
@@ -158,7 +189,10 @@ namespace Rossvyaz2
             {
                 FormEnabled = !value;
                 int To = value ? 230 : 0;
-                DoubleAnimation anim = new DoubleAnimation();
+                DoubleAnimation anim = new DoubleAnimation()
+                {
+                    IsAdditive = true
+                };
                 anim.To = To;
                 anim.Duration = TimeSpan.FromMilliseconds(500);
                 anim.AccelerationRatio = 0.5;

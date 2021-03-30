@@ -131,7 +131,7 @@
                     <Label FontSize="18" Grid.Column="1" Content="Обработать" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 </Grid>
             </Button>
-            <Button x:Name="ButtonCopy" IsEnabled="False" Grid.Column="3" Grid.Row="9" Grid.ColumnSpan="1" Margin="1" Click="Button_Click_5">
+            <Button x:Name="ButtonCopy" IsEnabled="False" Grid.Column="3" Grid.Row="9" Grid.ColumnSpan="1" Margin="1" Click="Button_Click_5" Background="#dcf2e4">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -141,7 +141,7 @@
                     <Label FontSize="18" Grid.Column="1" Content="Копировать" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 </Grid>
             </Button>
-            <Button x:Name="ButtonSave" IsEnabled="False" Grid.Column="4" Grid.Row="9" Grid.ColumnSpan="1" Margin="1" Click="Button_Click_6">
+            <Button x:Name="ButtonSave" IsEnabled="False" Grid.Column="4" Grid.Row="9" Grid.ColumnSpan="1" Margin="1" Click="Button_Click_6" Background="#dcf2e4">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -153,7 +153,14 @@
             </Button>
         </Grid>
         <Border x:Name="ProgressInfo" Visibility="Visible" Height="0" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Center" CornerRadius="10" BorderBrush="Gray" Background="#DD000000" Margin="20" Grid.RowSpan="2">
-            <ProgressBar Height="30" Margin="10" BorderBrush="White" Foreground="White" Background="Black" IsIndeterminate="True" />
+            <Grid  Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label x:Name="ProgressText" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Content="Загрузка" FontSize="20"></Label>
+                <ProgressBar Height="30" Grid.Row="1" BorderBrush="White" Foreground="White" Background="Black" IsIndeterminate="True" />
+            </Grid>
         </Border>
     </Grid>
 </Window>

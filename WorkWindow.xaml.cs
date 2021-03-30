@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -46,7 +47,8 @@ namespace Rossvyaz2
                 {
                     To = To,
                     Duration = TimeSpan.FromMilliseconds(500),
-                    AccelerationRatio = 0.5
+                    AccelerationRatio = 0.5,
+                    IsAdditive = true
                 };
                 MainFrameBlur.BeginAnimation(BlurEffect.RadiusProperty, blur);
                 MainFrame.IsEnabled = value;
@@ -67,6 +69,11 @@ namespace Rossvyaz2
                 };
                 ProgressInfo.BeginAnimation(HeightProperty, anim);
             }
+        }
+
+        public string ProgressTitle
+        {
+            set => Dispatcher.Invoke(() => ProgressText.Content = value);
         }
 
         public static void Error(string text)
@@ -194,12 +201,15 @@ namespace Rossvyaz2
                 bool checkRegionNo = CheckRegionNo.IsChecked.Value;
                 await Task.Run(() =>
                 {
+                    ProgressTitle = "Фильтрация";
                     var phoneRanger = new PhoneRanger();
                     phoneRanger.Ranges.AddRange(
                         rossRecords.GetRecords(
                             Operators.Selected.ToArray(), Regions.Selected.ToArray(), checkOperatorNo, checkRegionNo)
                         .Select(x => new Range(x.Min, x.Max)));
+                    ProgressTitle = "Объединение";
                     phoneRanger.Merge();
+                    ProgressTitle = "Обработка";
                     if (phoneRanger.Ranges.Count() == 0) OutText = string.Empty;
                     switch (style)
                     {
@@ -215,6 +225,7 @@ namespace Rossvyaz2
                         default:
                             throw new Exception("Обработчик для данного стиля не найден");
                     }
+                    ProgressTitle = "Завершение";
                 });
             }
             catch (Exception ex)
@@ -245,7 +256,7 @@ namespace Rossvyaz2
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             OptionsWorker.Options.Splitter = SplitterSelector.SelectedIndex;
-            OptionsWorker.Options.WorkStyle = ModeSelector.SelectedIndex;
+            OptionsWorker.Options.WorkStyle = ModeSelector.SelectedIndex; 
         }
 
         private void Button_Click_6(object sender, RoutedEventArgs e)

@@ -70,7 +70,14 @@
         </Grid>
         </Border>
         <Border x:Name="ProgressInfo" Visibility="Visible" Height="0" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Center" CornerRadius="10" BorderBrush="Gray" Background="#DD000000" Margin="20">
-            <ProgressBar Height="30" Margin="10" BorderBrush="White" Foreground="White" Background="Black" IsIndeterminate="True" />
+            <Grid  Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label x:Name="ProgressText" Foreground="White" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Content="rerwerwerew"></Label>
+                <ProgressBar Height="30" Grid.Row="1" BorderBrush="White" Foreground="White" Background="Black" IsIndeterminate="True" />
+            </Grid>
         </Border>
         <Grid x:Name="About" Margin="10" Height="0" VerticalAlignment="Stretch" Background="White">
             <Grid.Effect>
