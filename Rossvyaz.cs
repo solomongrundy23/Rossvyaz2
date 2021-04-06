@@ -222,13 +222,15 @@ namespace Rossvyaz2
 
     public class Record : Range
     {
+        private ulong ConvertString(string code, string number) => ulong.Parse($"7{code}{number}");
+
         public Record(string param_string)
         {
             try
             {
                 string[] recs = param_string.Split(';');
-                Min = ulong.Parse("7" + recs[0] + recs[1]);
-                Max = ulong.Parse("7" + recs[0] + recs[2]);
+                Min = ConvertString(recs[0], recs[1]);
+                Max = ConvertString(recs[0], recs[2]);
                 Operator = recs[4];
                 Region = recs[5];
             }

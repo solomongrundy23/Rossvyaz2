@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Парсер csv-файлов РосСвязи" Height="600" Width="800" WindowStartupLocation="CenterScreen"
         WindowState="Maximized" MinHeight="600" MinWidth="800" Loaded="Window_Loaded" Closing="Window_Closing">
-    <Grid>
+    <Grid  UseLayoutRounding ="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="306*"/>
             <RowDefinition Height="263*"/>
@@ -109,9 +109,9 @@
             </Button>
             <Label FontSize="18" Content="Вывести результат обработки в виде:" HorizontalContentAlignment="Right" VerticalAlignment="Center" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="1"/>
             <ComboBox FontSize="18" x:Name="ModeSelector" Background="White" VerticalAlignment="Center" BorderBrush="Black" Margin="1" Grid.Column="2" Grid.Row="7" Grid.ColumnSpan="1">
-                <System:String>Разложить на диапозоны и регулярными выражениями</System:String>
-                <System:String>Разложить диапозоны и вывести по кодам</System:String>
-                <System:String>Объединенные диапозоны MIN-MAX</System:String>
+                <System:String>Регулярные выражения</System:String>
+                <System:String>Начинается с</System:String>
+                <System:String>Диапозоны MIN-MAX</System:String>
             </ComboBox>
             <Label FontSize="18" Content="Разделитель:" HorizontalContentAlignment="Right" VerticalAlignment="Center" Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="1"/>
             <ComboBox BorderThickness="1" FontSize="18" x:Name="SplitterSelector" Background="White" VerticalAlignment="Center" BorderBrush="Black" Margin="1" Grid.Column="4" Grid.Row="7" Grid.ColumnSpan="1">
@@ -131,7 +131,7 @@
                     <Label FontSize="18" Grid.Column="1" Content="Обработать" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 </Grid>
             </Button>
-            <Button x:Name="ButtonCopy" IsEnabled="False" Grid.Column="3" Grid.Row="9" Grid.ColumnSpan="1" Margin="1" Click="Button_Click_5">
+            <Button x:Name="ButtonCopy" IsEnabled="False" Grid.Column="3" Grid.Row="9" Grid.ColumnSpan="1" Margin="1" Click="Button_Click_5" Background="#dcf2e4">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -141,7 +141,7 @@
                     <Label FontSize="18" Grid.Column="1" Content="Копировать" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 </Grid>
             </Button>
-            <Button x:Name="ButtonSave" IsEnabled="False" Grid.Column="4" Grid.Row="9" Grid.ColumnSpan="1" Margin="1" Click="Button_Click_6">
+            <Button x:Name="ButtonSave" IsEnabled="False" Grid.Column="4" Grid.Row="9" Grid.ColumnSpan="1" Margin="1" Click="Button_Click_6" Background="#dcf2e4">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -152,8 +152,15 @@
                 </Grid>
             </Button>
         </Grid>
-        <Border x:Name="ProgressInfo" Visibility="Visible" Height="0" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Center" CornerRadius="10" BorderBrush="Gray" Background="#DD000000" Margin="20" Grid.RowSpan="2">
-            <ProgressBar Height="30" Margin="10" BorderBrush="White" Foreground="White" Background="Black" IsIndeterminate="True" />
+        <Border x:Name="ProgressInfo" Visibility="Visible" Height="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="10" BorderBrush="#88000000" Background="#88000000" Margin="20" Grid.RowSpan="2">
+            <Grid  Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label x:Name="ProgressText" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Content="Загрузка" FontSize="20"></Label>
+                <ProgressBar Height="30" Grid.Row="1" BorderBrush="#88FFFFFF" Foreground="#88FFFFFF" Background="Transparent" IsIndeterminate="True" />
+            </Grid>
         </Border>
     </Grid>
 </Window>
