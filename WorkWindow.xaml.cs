@@ -27,9 +27,11 @@ namespace Rossvyaz2
     {
         public WorkWindow(string[] files)
         {
+            _files = files;
             InitializeComponent();
-            LoadWindow(files);
         }
+
+        private string[] _files;
 
         public SaveFileDialog SaverDialog = new SaveFileDialog()
         {
@@ -60,7 +62,7 @@ namespace Rossvyaz2
             get => ProgressInfo.Visibility == Visibility.Visible;
             set
             {
-                int To = value ? 200 : 0;
+                int To = value ? 300 : 0;
                 var anim = new DoubleAnimation()
                 {
                     To = To,
@@ -245,6 +247,7 @@ namespace Rossvyaz2
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            LoadWindow(_files);
             SplitterSelector.SelectedIndex =
                 OptionsWorker.Options.Splitter > -1 && OptionsWorker.Options.Splitter < SplitterSelector.Items.Count ?
                 OptionsWorker.Options.Splitter : 0;

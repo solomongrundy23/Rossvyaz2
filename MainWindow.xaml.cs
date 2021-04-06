@@ -79,13 +79,12 @@ namespace Rossvyaz2
             get => ProgressInfo.Visibility == Visibility.Visible;
             set
             {
-                int To = value ? 200 : 0;
+                int To = value ? 300 : 0;
                 DoubleAnimation anim = new DoubleAnimation()
                 {
                     IsAdditive = true,
                     To = To,
-                    Duration = TimeSpan.FromMilliseconds(500),
-                    AccelerationRatio = 0.5
+                    Duration = TimeSpan.FromMilliseconds(500)
                 };
                 ProgressInfo.BeginAnimation(HeightProperty, anim);
             }
@@ -159,11 +158,21 @@ namespace Rossvyaz2
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             var WW = new WorkWindow(Files);
-            this.Hide();
-            WW.ShowDialog();
-            WW.Close();
-            this.Show();
-            GC.Collect(GC.MaxGeneration);
+            try
+            {
+                this.Hide();
+                WW.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Error(ex.Message);
+            }
+            finally
+            {
+                WW.Close();
+                this.Show();
+                GC.Collect(GC.MaxGeneration);
+            }
         }
 
         private void OnLoad(object sender, RoutedEventArgs e)

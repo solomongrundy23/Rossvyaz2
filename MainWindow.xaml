@@ -70,22 +70,14 @@
             </Button>
         </Grid>
         </Border>
-<<<<<<< HEAD
         <Border x:Name="ProgressInfo" Visibility="Visible" Height="0" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Center" CornerRadius="10" BorderBrush="#88000000" Background="#88000000" Margin="20">
-=======
-        <Border x:Name="ProgressInfo" Visibility="Visible" Height="0" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Center" CornerRadius="10" BorderBrush="Gray" Background="#DD000000" Margin="20">
->>>>>>> 04687a224e85b71ff310e8e98413eeeb720acef7
             <Grid  Margin="10">
                 <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Label x:Name="ProgressText" Foreground="White" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Content="rerwerwerew"></Label>
-<<<<<<< HEAD
-                <ProgressBar Height="30" Grid.Row="1" BorderBrush="#88FFFFFF" Foreground="#88FFFFFF" Background="Transparent" IsIndeterminate="True"/>
-=======
-                <ProgressBar Height="30" Grid.Row="1" BorderBrush="White" Foreground="White" Background="Black" IsIndeterminate="True" />
->>>>>>> 04687a224e85b71ff310e8e98413eeeb720acef7
+                <Label x:Name="ProgressText" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Content="Загрузка" FontSize="20"></Label>
+                <ProgressBar Grid.Row="1" BorderBrush="#88FFFFFF" Foreground="#88FFFFFF" Background="Transparent" IsIndeterminate="True" />
             </Grid>
         </Border>
         <Grid x:Name="About" Margin="10" Height="0" VerticalAlignment="Stretch" Background="White">

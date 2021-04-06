@@ -58,7 +58,7 @@ namespace Rossvyaz2
             }
             catch (Exception ex) 
             {
-                WorkWindow.Error(ex.Message);
+                throw new Exception($"Ошибка {file_name}\n{ex.Message}");
             }
         }
         /// <summary>
@@ -78,14 +78,23 @@ namespace Rossvyaz2
             await Task.Run(() => Load(file_name, clear_old_records));
         }
         /// <summary>
+        ///  Загрузить и распрасить указанный файл
+        /// </summary>
+        /// <param name="file_name">Имя файла</param>
+        /// <param name="clear_old_records">Очищать ли старые данные</param>
+        public void Load(string[] file_names, bool clear_old_records = true)
+        {
+            if (clear_old_records) this.Items.Clear();
+            foreach (string file_name in file_names) Load(file_name, false);
+        }
+        /// <summary>
         ///  Загрузить и распрасить указанный файл асинхронно
         /// </summary>
         /// <param name="file_name">Имя файла</param>
         /// <param name="clear_old_records">Очищать ли старые данные</param>
         public async Task LoadAsync(string[] file_names, bool clear_old_records = true)
         {
-            if (clear_old_records) this.Items.Clear();
-            foreach (string file_name in file_names) await Task.Run(() => Load(file_name, false));
+            await Task.Run(() => Load(file_names, clear_old_records));
         }
         /// <summary>
         /// Получить запись по телефонному номеру, если в диапозон входит этот файл, то вернет Record, иначе null
