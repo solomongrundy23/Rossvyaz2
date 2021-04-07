@@ -80,12 +80,9 @@
                 <ProgressBar Grid.Row="1" BorderBrush="#88FFFFFF" Foreground="#88FFFFFF" Background="Transparent" IsIndeterminate="True" />
             </Grid>
         </Border>
-        <Grid x:Name="About" Margin="10" Height="0" VerticalAlignment="Stretch" Background="White">
-            <Grid.Effect>
-                <DropShadowEffect BlurRadius="10" Direction="0"/>
-            </Grid.Effect>
-            <Border BorderBrush="Black" BorderThickness="2">
-                <Grid>
+        <Grid x:Name="About" Margin="10" VerticalAlignment="Stretch" Height="0" Background="White">
+            <Border BorderBrush="Black" BorderThickness="1">
+                <Grid Margin="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="10"/>
                         <RowDefinition Height="50"/>

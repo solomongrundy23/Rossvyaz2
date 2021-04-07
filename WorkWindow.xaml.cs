@@ -44,28 +44,17 @@ namespace Rossvyaz2
             set
             {
                 ProgressVisible = !value;
-                int To = value ? 0 : 20;
-                DoubleAnimation blur = new DoubleAnimation()
-                {
-                    To = To,
-                    Duration = TimeSpan.FromMilliseconds(500),
-                    AccelerationRatio = 0.5,
-                    IsAdditive = true
-                };
-                MainFrameBlur.BeginAnimation(BlurEffect.RadiusProperty, blur);
-                MainFrame.IsEnabled = value;
+                MainFrameBlur.Radius = value ? 0 : 20;
             }
         }
 
         private bool ProgressVisible
         {
-            get => ProgressInfo.Visibility == Visibility.Visible;
             set
             {
-                int To = value ? 300 : 0;
                 var anim = new DoubleAnimation()
                 {
-                    To = To,
+                    To = value ? 300 : 0,
                     Duration = TimeSpan.FromMilliseconds(500)
                 };
                 ProgressInfo.BeginAnimation(HeightProperty, anim);

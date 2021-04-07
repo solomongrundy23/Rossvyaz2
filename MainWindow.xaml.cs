@@ -61,22 +61,14 @@ namespace Rossvyaz2
             get => MainFrame.IsEnabled;
             set
             {
-                int To = value ? 0 : 20;
-                DoubleAnimation blur = new DoubleAnimation()
-                {
-                    IsAdditive = true,
-                    To = To,
-                    Duration = TimeSpan.FromMilliseconds(500),
-                    AccelerationRatio = 0.5
-                };
-                MainBlur.BeginAnimation(BlurEffect.RadiusProperty, blur);
+                int To = value ? 0 : 10;
+                MainBlur.Radius = value ? 0 : 20;
                 MainFrame.IsEnabled = value;
             }
         }
 
         private bool ProgressVisible
         {
-            get => ProgressInfo.Visibility == Visibility.Visible;
             set
             {
                 int To = value ? 300 : 0;
@@ -196,15 +188,15 @@ namespace Rossvyaz2
             get => About.Visibility == Visibility.Visible;
             set
             {
+                About.IsEnabled = value;
                 FormEnabled = !value;
-                int To = value ? 230 : 0;
                 DoubleAnimation anim = new DoubleAnimation()
                 {
-                    IsAdditive = true
+                    IsAdditive = true,
+                    To = value ? 230 : 0,
+                    Duration = TimeSpan.FromMilliseconds(500),
+                    AccelerationRatio = 0.5
                 };
-                anim.To = To;
-                anim.Duration = TimeSpan.FromMilliseconds(500);
-                anim.AccelerationRatio = 0.5;
                 About.BeginAnimation(HeightProperty, anim);
             }
         }
