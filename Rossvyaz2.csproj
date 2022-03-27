@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icons8-уборочная-машина-48.ico</ApplicationIcon>
+    <ApplicationIcon>Images\icons8-уборочная-машина-48.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -140,7 +140,7 @@
     <Resource Include="Images\icons8-плюс-64.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icons8-уборочная-машина-48.ico" />
+    <Resource Include="Images\icons8-уборочная-машина-48.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\icons8-уборочная-машина-48.png" />

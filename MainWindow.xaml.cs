@@ -10,15 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Effects;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Rossvyaz2
 {
@@ -33,6 +26,7 @@ namespace Rossvyaz2
         public MainWindow()
         {
             //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
             try
             {
                 OptionsWorker.Load();
@@ -127,7 +121,7 @@ namespace Rossvyaz2
                 {
                     if (!Directory.Exists(OptionsWorker.DataPath)) 
                         Directory.CreateDirectory(OptionsWorker.DataPath);
-                    using (var wc = new WebClient())
+                    using (var wc = new WebClient() { })
                         foreach(string url in url_array)
                             wc.DownloadFile(url, GetFileNameFromUrl(url));
                     return true;
