@@ -14,7 +14,7 @@
         <Border>
         <Grid x:Name="MainFrame" Margin="10,10,10,10">
             <Grid.Effect>
-                <BlurEffect x:Name="MainBlur" Radius="0"/>
+                <BlurEffect x:Name="MainBlur" Radius="0" RenderingBias="Performance"/>
             </Grid.Effect>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"></RowDefinition>
@@ -36,7 +36,7 @@
             <Button Grid.Row="0" Grid.Column="4" Margin="5" x:Name="DoWork" Background="Transparent" BorderBrush="Black" Click="Button_Click">
                 <Image  Source="Images/icons8-открыть-папку-26.png" Stretch="None"/>
             </Button>
-            <Button Grid.Row="3" Grid.ColumnSpan="5" Margin="5"  Background="Transparent" BorderBrush="Black" Click="Button_Click_2">
+                <Button Grid.Row="3" Grid.ColumnSpan="5" Margin="5"  Background="Transparent" BorderBrush="Black" Click="Button_Click_2">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>

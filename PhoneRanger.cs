@@ -73,7 +73,7 @@ namespace Rossvyaz2
             }
             catch
             {
-                throw new Exception("Не удалось произвести парсинг данных, проверьте вводимые данные");
+                throw new Exception("Не удалось произвести парсинг данных, проверьте вводные данные");
             }
             finally
             {

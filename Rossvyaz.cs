@@ -245,7 +245,7 @@ namespace Rossvyaz2
             }
             catch
             {
-                throw new FormatException("Ошибка обработки записи");
+                throw new FormatException($"Ошибка обработки записи:\n{param_string}");
             }
         }
         public string Operator;

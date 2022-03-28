@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <Grid x:Name="MainFrame" Grid.RowSpan="2">
             <Grid.Effect>
-                <BlurEffect x:Name="MainFrameBlur" Radius="0" RenderingBias="Quality"/>
+                <BlurEffect x:Name="MainFrameBlur" Radius="0" RenderingBias="Performance"/>
             </Grid.Effect>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10"/>
