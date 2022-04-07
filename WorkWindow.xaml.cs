@@ -45,6 +45,7 @@ namespace Rossvyaz2
             {
                 ProgressVisible = !value;
                 MainFrameBlur.Radius = value ? 0 : 20;
+                FormGrid.IsEnabled = value;
             }
         }
 
@@ -84,7 +85,8 @@ namespace Rossvyaz2
             try
             {
                 MainFrameEnabled = false;
-                await rossRecords.LoadAsync(files);
+                Exception ex = await rossRecords.LoadAsync(files);
+                if (ex != null) throw ex;
                 if (rossRecords.Items.Count() == 0) throw new Exception("При парсинге не удалость заполнить таблицу данных");
                 string[] regions = rossRecords.GetRegionsList();
                 Regions.NoSelect.AddRange(regions);
@@ -108,6 +110,7 @@ namespace Rossvyaz2
         private Lists Regions = new Lists();
         private Lists Operators = new Lists();
         private string _OutText = string.Empty;
+        private int _cutResult = 20000;
         public string OutText
         {
             get => _OutText;
@@ -118,11 +121,11 @@ namespace Rossvyaz2
                 {
                     if (_OutText.IsEmpty()) OutTextBox.Text = "Нет данных или пустой результат";
                     else
-                    if (_OutText.Length > 5000)
+                    if (_OutText.Length > _cutResult)
                     {
-                        OutTextBox.Text = "Внимание! Результат большой, отображаются первые 10000 символов, " +
+                        OutTextBox.Text = $"Внимание! Результат большой, отображаются первые {_cutResult} символов, " +
                         "скопируйте или сохраните результат по соответствующим кнопкам" 
-                        + Environment.NewLine + Environment.NewLine + _OutText.Cut(10000);
+                        + Environment.NewLine + Environment.NewLine + _OutText.Cut(_cutResult);
                     } 
                     else
                         OutTextBox.Text = _OutText;

@@ -47,7 +47,7 @@ namespace Rossvyaz2
         /// </summary>
         /// <param name="file_name">Имя файла</param>
         /// <param name="clear_old_records">Очищать ли старые данные</param>
-        public void Load(string file_name, bool clear_old_records = true)
+        public Exception Load(string file_name, bool clear_old_records = true)
         {
             try
             {
@@ -55,10 +55,11 @@ namespace Rossvyaz2
                 string[] data = File.ReadAllLines(file_name);
                 for (int i = 1; i < data.Length; i++)
                     if (!string.IsNullOrEmpty(data[i])) Items.Add(new Record(data[i]));
+                return null;
             }
             catch (Exception ex) 
             {
-                throw new Exception($"Ошибка {file_name}\n{ex.Message}");
+                return new Exception($"Ошибка {file_name}\n{ex.Message}");
             }
         }
         /// <summary>
@@ -73,28 +74,40 @@ namespace Rossvyaz2
         /// </summary>
         /// <param name="file_name">Имя файла</param>
         /// <param name="clear_old_records">Очищать ли старые данные</param>
-        public async Task LoadAsync(string file_name, bool clear_old_records = true)
+        public async Task<Exception> LoadAsync(string file_name, bool clear_old_records = true)
         {
-            await Task.Run(() => Load(file_name, clear_old_records));
+            return await Task.Run(() => Load(file_name, clear_old_records));
         }
         /// <summary>
         ///  Загрузить и распрасить указанный файл
         /// </summary>
         /// <param name="file_name">Имя файла</param>
         /// <param name="clear_old_records">Очищать ли старые данные</param>
-        public void Load(string[] file_names, bool clear_old_records = true)
+        public Exception Load(string[] file_names, bool clear_old_records = true)
         {
-            if (clear_old_records) this.Items.Clear();
-            foreach (string file_name in file_names) Load(file_name, false);
+            try
+            {
+                if (clear_old_records) this.Items.Clear();
+                foreach (string file_name in file_names)
+                {
+                    Exception ex = Load(file_name, false);
+                    if (ex != null) return ex;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return ex;
+            }
         }
         /// <summary>
         ///  Загрузить и распрасить указанный файл асинхронно
         /// </summary>
         /// <param name="file_name">Имя файла</param>
         /// <param name="clear_old_records">Очищать ли старые данные</param>
-        public async Task LoadAsync(string[] file_names, bool clear_old_records = true)
+        public async Task<Exception> LoadAsync(string[] file_names, bool clear_old_records = true)
         {
-            await Task.Run(() => Load(file_names, clear_old_records));
+            return await Task.Run(() => Load(file_names, clear_old_records));
         }
         /// <summary>
         /// Получить запись по телефонному номеру, если в диапозон входит этот файл, то вернет Record, иначе null

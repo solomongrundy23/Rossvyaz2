@@ -12,9 +12,27 @@
                                                 UpdateSourceTrigger=PropertyChanged}"
                                  x:Name="textSource" 
                                  Background="Transparent" 
-                                 Panel.ZIndex="2" 
-                                 HorizontalContentAlignment="Center" 
-                                 VerticalContentAlignment="Center"
+                                 Panel.ZIndex="2"
+                                 VerticalScrollBarVisibility="{Binding Path=VerticalScrollBarVisibility,
+                                                RelativeSource={RelativeSource TemplatedParent}, 
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}"
+                                 HorizontalScrollBarVisibility="{Binding Path=HorizontalScrollBarVisibility,
+                                                RelativeSource={RelativeSource TemplatedParent}, 
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}"
+                                 TextWrapping="{Binding Path=TextWrapping,
+                                                RelativeSource={RelativeSource TemplatedParent}, 
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}"
+                                 HorizontalContentAlignment="{Binding Path=HorizontalContentAlignment,
+                                                RelativeSource={RelativeSource TemplatedParent}, 
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}"
+                                 VerticalContentAlignment="{Binding Path=VerticalContentAlignment,
+                                                RelativeSource={RelativeSource TemplatedParent}, 
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}"
                                  BorderBrush="Black"/>
                         <TextBox Text="{TemplateBinding Tag}" Background="{TemplateBinding Background}" Panel.ZIndex="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black">
                             <TextBox.Style>
