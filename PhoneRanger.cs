@@ -98,6 +98,7 @@ namespace Rossvyaz2
             {
                 var Temp = Ranges.OrderBy(x => x.Min).ThenBy(x => x.Max).ToList();
                 Ranges.Clear();
+                Garbage();
                 Range actual = null;
                 foreach (Range range in Temp)
                 {
@@ -108,6 +109,10 @@ namespace Rossvyaz2
                         {
                             Ranges.Add(actual);
                             actual = range;
+                        }
+                        else
+                        {
+                            actual.Max = range.Max;
                         }
                     }
                 }
