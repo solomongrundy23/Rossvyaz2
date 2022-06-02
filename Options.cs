@@ -12,10 +12,15 @@ namespace Rossvyaz2
         public string[] Urls = new string[] { };
     }
 
+    public static class Config
+    {
+        public static readonly long animDuration = 250;
+    }
+
     public static class OptionsWorker
     {
-        public static string DataPath = AppDomain.CurrentDomain.BaseDirectory + "Files\\";
-        public static Options Options;
+        public static string DataPath { get; private set; } = AppDomain.CurrentDomain.BaseDirectory + "Files\\";
+        public static Options Options { get; set; }
         public static void Load() =>
             Options = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "Data\\" + "RSParser.json").FromJson<Options>();
         public static void Save() => 

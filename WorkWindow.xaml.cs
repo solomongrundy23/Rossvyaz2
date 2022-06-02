@@ -44,8 +44,6 @@ namespace Rossvyaz2
             set
             {
                 ProgressVisible = !value;
-                MainFrameBlur.Radius = value ? 0 : 20;
-                FormGrid.IsEnabled = value;
             }
         }
 
@@ -53,12 +51,35 @@ namespace Rossvyaz2
         {
             set
             {
-                var anim = new DoubleAnimation()
+                if (value)
                 {
-                    To = value ? 300 : 0,
-                    Duration = TimeSpan.FromMilliseconds(500)
-                };
-                ProgressInfo.BeginAnimation(HeightProperty, anim);
+                    MainFrameBlur.Radius = 5;
+                    FormGrid.IsEnabled = false;
+                    var anim = new DoubleAnimation()
+                    {
+                        IsAdditive = true,
+                        To = 200,
+                        Duration = TimeSpan.FromMilliseconds(Config.animDuration)
+                    };
+                    ProgressInfo.BeginAnimation(WidthProperty, anim);
+                }
+                else
+                {
+                    var anim = new DoubleAnimation()
+                    {
+                        IsAdditive = true,
+                        To = 0,
+                        Duration = TimeSpan.FromMilliseconds(Config.animDuration)
+                    };
+                    anim.Completed += (s, e) =>
+                    {
+                        MainFrameBlur.Radius = 0;
+                        FormGrid.IsEnabled = true;
+                    };
+                    ProgressInfo.BeginAnimation(WidthProperty, anim);
+                }
+
+
             }
         }
 
@@ -77,6 +98,7 @@ namespace Rossvyaz2
             Dispatcher.Invoke(() =>
             {
                 list.ItemsSource = items.Where(x => x.ToLower().Contains(filter)).OrderBy(x => x);
+                GC.Collect();
             });
         }
 
@@ -110,7 +132,7 @@ namespace Rossvyaz2
         private Lists Regions = new Lists();
         private Lists Operators = new Lists();
         private string _OutText = string.Empty;
-        private int _cutResult = 20000;
+        private int _cutResult = 50000;
         public string OutText
         {
             get => _OutText;
@@ -124,7 +146,7 @@ namespace Rossvyaz2
                     if (_OutText.Length > _cutResult)
                     {
                         OutTextBox.Text = $"Внимание! Результат большой, отображаются первые {_cutResult} символов, " +
-                        "скопируйте или сохраните результат по соответствующим кнопкам" 
+                        "скопируйте или сохраните результат нажатием по соответствующим кнопкам" 
                         + Environment.NewLine + Environment.NewLine + _OutText.Cut(_cutResult);
                     } 
                     else

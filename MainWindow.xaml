@@ -7,17 +7,16 @@
         xmlns:local="clr-namespace:Rossvyaz2"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="Rossvyaz2.MainWindow"
         mc:Ignorable="d"
-        Title="Парсер csv-файлов РосСвязи" Icon="Images/icons8-уборочная-машина-48.png" Height="520" Width="680" Background="White"
-        FontFamily="Open Sans" FontSize="16" MinHeight="520" MinWidth="680" ResizeMode="CanResize" WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen" 
+        Title="Парсер csv-файлов РосСвязи" Icon="Images/icons8-уборочная-машина-48.png" Height="350" Width="800" Background="White"
+        FontFamily="Open Sans" FontSize="16" MinHeight="350" MinWidth="640" ResizeMode="CanResize" WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen" 
     Loaded="OnLoad" IsVisibleChanged="Window_IsVisibleChanged" Closed="Window_Closed">
-    <Grid Height="480" Width="640" UseLayoutRounding ="True">
+    <Grid UseLayoutRounding ="True">
         <Border>
         <Grid x:Name="MainFrame" Margin="10,10,10,10">
             <Grid.Effect>
                 <BlurEffect x:Name="MainBlur" Radius="0" RenderingBias="Performance"/>
             </Grid.Effect>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
@@ -31,12 +30,12 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Margin="5" Content="Пути файлов:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-            <ListBox Grid.Row="0" Grid.Column="1" Margin="5" Grid.ColumnSpan="3" Grid.RowSpan="3" x:Name="TextFiles" BorderBrush="Black"/>
-            <Button Grid.Row="0" Grid.Column="4" Margin="5" x:Name="DoWork" Background="Transparent" BorderBrush="Black" Click="Button_Click">
+            <Label Grid.Row="0" Grid.Column="0" Margin="5" Grid.RowSpan="2" Content="Пути файлов:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <ListBox Grid.Row="0" Grid.Column="1" Margin="5" Grid.ColumnSpan="3" Grid.RowSpan="2" x:Name="TextFiles" BorderBrush="Black"/>
+            <Button Grid.Row="0" Grid.Column="4" Margin="5" Grid.RowSpan="2" x:Name="DoWork" Background="Transparent" BorderBrush="Black" Click="Button_Click">
                 <Image  Source="Images/icons8-открыть-папку-26.png" Stretch="None"/>
             </Button>
-                <Button Grid.Row="3" Grid.ColumnSpan="5" Margin="5"  Background="Transparent" BorderBrush="Black" Click="Button_Click_2">
+                <Button Grid.Row="2" Grid.ColumnSpan="5" Margin="5"  Background="Transparent" BorderBrush="Black" Click="Button_Click_2">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -47,8 +46,8 @@
                 </Grid>
             </Button>
 
-            <Label Margin="5" Grid.Row="4" Grid.ColumnSpan="3"  Content="Актуальные CSV-файлы с сайта РосСвязи:" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <Button Margin="5" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Background="Transparent" BorderBrush="Black" Click="Button_Click_1">
+            <Label Margin="5" Grid.Row="3" Grid.ColumnSpan="3"  Content="Актуальные CSV-файлы с сайта РосСвязи:" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Button Margin="5" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" Background="Transparent" BorderBrush="Black" Click="Button_Click_1">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -70,31 +69,50 @@
             </Button>
         </Grid>
         </Border>
-        <Border x:Name="ProgressInfo" Visibility="Visible" Height="0" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Center" CornerRadius="10" BorderBrush="#88000000" Background="#88000000" Margin="20">
-            <Grid  Margin="10">
+        <Border x:Name="ProgressInfo" Visibility="Visible" Height="0" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Center" CornerRadius="10" BorderBrush="#BB000000" Background="#BB000000" Margin="20">
+            <Grid Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"></RowDefinition>
-                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="60"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Label x:Name="ProgressText" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Content="Загрузка" FontSize="20"></Label>
-                <ProgressBar Grid.Row="1" BorderBrush="#88FFFFFF" Foreground="#88FFFFFF" Background="Transparent" IsIndeterminate="True" />
+                <Label x:Name="LoadLogo" Foreground="White" Visibility="Visible" Grid.Row="1" Height="40" Width="40" FontSize="25" FontFamily="Segoe MDL2 Assets" Content="&#xE713;" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                    <Label.RenderTransform>
+                        <RotateTransform x:Name="rotate"
+                         CenterX="20"
+                         CenterY="20"/>
+                    </Label.RenderTransform>
+                    <Label.Triggers>
+                        <EventTrigger RoutedEvent="Loaded">
+                            <BeginStoryboard>
+                                <Storyboard RepeatBehavior="Forever">
+                                    <DoubleAnimation Storyboard.TargetName="rotate"
+                                     Storyboard.TargetProperty="Angle"
+                                     By="360" Duration="0:0:3"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Label.Triggers>
+                </Label>
+                <Label x:Name="ProgressText" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="2" Content="Загрузка" FontSize="20"></Label>
             </Grid>
         </Border>
-        <Grid x:Name="About" Margin="10" VerticalAlignment="Stretch" Height="0" Background="White">
+        <Grid x:Name="About" Margin="20" VerticalAlignment="Stretch" Height="0" Background="White">
             <Border BorderBrush="Black" BorderThickness="1">
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="10"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
                     <Label FontWeight="Medium" FontSize="20" Content="Программа RSParser" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-                    <Label FontSize="18" Content="Инструмент для преобразования данных из csv-файлов Россвязи" Grid.Row="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                    <Label FontSize="18" Content="Инструмент для преобразования данных из csv-файлов Россвязи" Grid.Row="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
                     <Label x:Name="LabelVersion" FontSize="18" Content="Версия: " Grid.Row="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
                     <Label FontSize="18" Content="Автор: Анисимов Сергей" Grid.Row="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
                     <Grid Grid.Row="5" Grid.RowSpan="2">

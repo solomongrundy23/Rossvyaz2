@@ -153,14 +153,33 @@
                     </Grid>
                 </Button>
             </Grid>
-            <Border x:Name="ProgressInfo" Height="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="10" BorderBrush="#88000000" Background="#88000000" Margin="20" Grid.RowSpan="2">
+            <Border x:Name="ProgressInfo" Height="120" Width="0" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="10" BorderBrush="#BB000000" Background="#BB000000" Margin="20" Grid.RowSpan="2">
                 <Grid  Margin="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="60"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Label x:Name="ProgressText" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Content="Загрузка" FontSize="20"></Label>
-                    <ProgressBar Grid.Row="1" BorderBrush="#88FFFFFF" Foreground="#88FFFFFF" Background="Transparent" IsIndeterminate="True" />
+                    <Label x:Name="LoadLogo" Foreground="White" Visibility="Visible" Grid.Row="1" Height="40" Width="40" FontSize="25" FontFamily="Segoe MDL2 Assets" Content="&#xE713;" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <Label.RenderTransform>
+                            <RotateTransform x:Name="rotate"
+                         CenterX="20"
+                         CenterY="20"/>
+                        </Label.RenderTransform>
+                        <Label.Triggers>
+                            <EventTrigger RoutedEvent="Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard RepeatBehavior="Forever">
+                                        <DoubleAnimation Storyboard.TargetName="rotate"
+                                     Storyboard.TargetProperty="Angle"
+                                     By="360" Duration="0:0:3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <Label x:Name="ProgressText" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="2" Content="Загрузка" FontSize="20"></Label>
                 </Grid>
             </Border>
         </Grid>

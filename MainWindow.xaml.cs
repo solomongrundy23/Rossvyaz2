@@ -23,7 +23,7 @@ namespace Rossvyaz2
 
         public MainWindow()
         {
-            //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
             try
             {
@@ -53,8 +53,7 @@ namespace Rossvyaz2
             get => MainFrame.IsEnabled;
             set
             {
-                int To = value ? 0 : 10;
-                MainBlur.Radius = value ? 0 : 20;
+                MainBlur.Radius = value ? 0 : 5;
                 MainFrame.IsEnabled = value;
             }
         }
@@ -63,14 +62,30 @@ namespace Rossvyaz2
         {
             set
             {
-                int To = value ? 300 : 0;
-                DoubleAnimation anim = new DoubleAnimation()
+                if (value)
                 {
-                    IsAdditive = true,
-                    To = To,
-                    Duration = TimeSpan.FromMilliseconds(500)
-                };
-                ProgressInfo.BeginAnimation(HeightProperty, anim);
+                    FormEnabled = false;
+                    int To = 120;
+                    DoubleAnimation anim = new DoubleAnimation()
+                    {
+                        IsAdditive = true,
+                        To = To,
+                        Duration = TimeSpan.FromMilliseconds(Config.animDuration)
+                    };
+                    ProgressInfo.BeginAnimation(HeightProperty, anim);
+                }
+                else
+                {
+                    int To = 0;
+                    DoubleAnimation anim = new DoubleAnimation()
+                    {
+                        IsAdditive = true,
+                        To = To,
+                        Duration = TimeSpan.FromMilliseconds(Config.animDuration)
+                    };
+                    anim.Completed += CloseAnimation_Completed;
+                    ProgressInfo.BeginAnimation(HeightProperty, anim);
+                }
             }
         }
 
@@ -81,7 +96,6 @@ namespace Rossvyaz2
 
         private async void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            FormEnabled = false;
             ProgressVisible = true;
             try
             {
@@ -99,7 +113,6 @@ namespace Rossvyaz2
             finally
             {
                 ProgressVisible = false;
-                FormEnabled = true;
             }
         }
 
@@ -180,17 +193,51 @@ namespace Rossvyaz2
             get => About.Visibility == Visibility.Visible;
             set
             {
-                About.IsEnabled = value;
-                FormEnabled = !value;
-                DoubleAnimation anim = new DoubleAnimation()
+                if (value)
                 {
-                    IsAdditive = true,
-                    To = value ? 230 : 0,
-                    Duration = TimeSpan.FromMilliseconds(500),
-                    AccelerationRatio = 0.5
-                };
-                About.BeginAnimation(HeightProperty, anim);
+                    FormEnabled = false;
+                    DoubleAnimation anim = new DoubleAnimation()
+                    {
+                        IsAdditive = true,
+                        To = 250,
+                        Duration = TimeSpan.FromMilliseconds(Config.animDuration),
+                        AccelerationRatio = 0.5
+                    };
+                    anim.Completed += OpenAbout_Completed;
+                    About.BeginAnimation(HeightProperty, anim);
+                }
+                else
+                {
+                    About.IsEnabled = false;
+                    DoubleAnimation anim = new DoubleAnimation()
+                    {
+                        IsAdditive = true,
+                        To = 0,
+                        Duration = TimeSpan.FromMilliseconds(Config.animDuration),
+                        AccelerationRatio = 0.5
+                    };
+                    anim.Completed += CloseAnimation_Completed;
+                    About.BeginAnimation(HeightProperty, anim);
+                }
             }
+        }
+
+        private void CloseAnimation_Completed(object sender, EventArgs e)
+        {
+            try
+            {
+                FormEnabled = true;
+            }
+            catch { }
+        }
+
+        private void OpenAbout_Completed(object sender, EventArgs e)
+        {
+            try
+            { 
+            About.IsEnabled = true;
+            }
+            catch { }
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
