@@ -154,5 +154,9 @@
   <ItemGroup>
     <Resource Include="Images\icons8-сохранить-50.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\sim.png" />
+    <Resource Include="Images\place.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,19 +4,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Effects;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Rossvyaz2
 {
@@ -53,7 +44,7 @@ namespace Rossvyaz2
             {
                 if (value)
                 {
-                    MainFrameBlur.Radius = 5;
+                    MainFrameBlur.Radius = Config.blurLevel;
                     FormGrid.IsEnabled = false;
                     var anim = new DoubleAnimation()
                     {
@@ -270,7 +261,7 @@ namespace Rossvyaz2
                 OptionsWorker.Options.WorkStyle : 0;
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
             OptionsWorker.Options.Splitter = SplitterSelector.SelectedIndex;
             OptionsWorker.Options.WorkStyle = ModeSelector.SelectedIndex; 
@@ -278,6 +269,8 @@ namespace Rossvyaz2
 
         private void Button_Click_6(object sender, RoutedEventArgs e)
         {
+            MainFrameBlur.Radius = Config.blurLevel;
+            FormGrid.IsEnabled = false;
             SaverDialog.FileName = string.Empty;
             if (SaverDialog.ShowDialog().Value)
             {
@@ -290,6 +283,8 @@ namespace Rossvyaz2
                     Error(ex.Message);
                 }
             }
+            FormGrid.IsEnabled = true;
+            MainFrameBlur.Radius = 0;
         }
     }
 }

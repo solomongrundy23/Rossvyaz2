@@ -15,6 +15,7 @@ namespace Rossvyaz2
     public static class Config
     {
         public static readonly long animDuration = 250;
+        public static readonly long blurLevel = 7;
     }
 
     public static class OptionsWorker

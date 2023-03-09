@@ -23,7 +23,7 @@ namespace Rossvyaz2
 
         public MainWindow()
         {
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
             try
             {
@@ -53,8 +53,8 @@ namespace Rossvyaz2
             get => MainFrame.IsEnabled;
             set
             {
-                MainBlur.Radius = value ? 0 : 5;
-                MainFrame.IsEnabled = value;
+                MainBlur.Radius = value ? 0 : Config.blurLevel;
+                MainFrame.IsEnabled = value; 
             }
         }
 
